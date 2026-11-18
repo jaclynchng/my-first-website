@@ -1,32 +1,133 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <meta name="description" content="My first website, connected to GitHub and Cloudflare.">
   <title>My First Website</title>
   <style>
-    body {
-      margin: 0;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    :root {
+      color-scheme: dark;
       background: #111827;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
+      color: #f8fafc;
+      font-family: system-ui, sans-serif;
+      --edge: #374458;
+      --muted: #b5c1d0;
+      --accent: #a6efcc;
     }
-    h1 { font-size: 42px; }
-    p { color: #cbd5e1; font-size: 19px; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    .page {
+      width: min(100% - 2 * clamp(1.25rem, 5vw, 5rem), 76rem);
+      min-height: 100vh;
+      min-height: 100svh;
+      margin-inline: auto;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+    header, footer {
+      padding-block: 1.5rem;
+      color: var(--muted);
+      font-size: .875rem;
+    }
+    header { border-bottom: 1px solid var(--edge); }
+    footer { border-top: 1px solid var(--edge); }
+    footer p { margin: 0; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(2rem, 6vw, 6rem);
+      padding-block: clamp(3rem, 10vh, 8rem);
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.75rem, 6vw, 6rem);
+      line-height: 1;
+      letter-spacing: -.07em;
+      text-wrap: balance;
+    }
+    .accent { color: var(--accent); }
+    .spark { font-size: .5em; vertical-align: .3em; letter-spacing: 0; }
+    .intro {
+      margin: 1.5rem 0 0;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.3rem);
+      line-height: 1.6;
+    }
+    .connection {
+      margin: 0;
+      border: 1px solid var(--edge);
+      background: #172235;
+    }
+    .connection-label {
+      margin: 0;
+      padding: 1rem;
+      border-bottom: 1px solid var(--edge);
+      color: var(--accent);
+      font: .8rem/1.5 ui-monospace, monospace;
+    }
+    .connection-label::before {
+      content: "";
+      display: inline-block;
+      width: .5rem;
+      height: .5rem;
+      margin-right: .65rem;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .path {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 1.5rem minmax(0, 1fr);
+      align-items: center;
+      min-height: 12rem;
+      padding: clamp(.75rem, 3vw, 2rem);
+      background-image: linear-gradient(#263246 1px, transparent 1px),
+        linear-gradient(90deg, #263246 1px, transparent 1px);
+      background-size: 1.25rem 1.25rem;
+    }
+    .node {
+      display: grid;
+      place-items: center;
+      padding: .85rem .2rem;
+      border: 1px solid #54647a;
+      background: #111827;
+      font-size: clamp(.78rem, 2vw, 1rem);
+      font-weight: 650;
+    }
+    .wire { height: 1px; background: var(--accent); }
+    @media (max-width: 46rem) {
+      .hero { grid-template-columns: minmax(0, 1fr); }
+      .path { min-height: 9rem; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      [data-enter] { animation: enter 450ms ease-out both; }
+      @keyframes enter {
+        from { opacity: 0; transform: translateY(.65rem); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
   </style>
 </head>
 <body>
-  <main>
-    <h1>My Website — Updated by AI ✨</h1>
-    <p>GitHub + Cloudflare Connected!</p>
-    <p>My website is officially live.</p>
-    <p>This website was updated using ChatGPT and GitHub.</p>
-  </main>
+  <div class="page">
+    <header>My First Website</header>
+    <main class="hero" data-enter>
+      <div>
+        <h1>My Website <span class="accent">— Updated by AI <span class="spark">✨</span></span></h1>
+        <p class="intro">My website is officially live.</p>
+      </div>
+      <section class="connection" aria-label="Website deployment">
+        <p class="connection-label">GitHub + Cloudflare Connected!</p>
+        <div class="path" aria-hidden="true">
+          <span class="node">GitHub</span>
+          <span class="wire"></span>
+          <span class="node">Cloudflare</span>
+        </div>
+      </section>
+    </main>
+    <footer><p>This website was updated using ChatGPT and GitHub.</p></footer>
+  </div>
 </body>
 </html>
